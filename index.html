@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAtour AI - Planificador Inclusivo</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; background-color: #f5f5f5; }
+        h1 { color: #0080ff; text-align: center; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        select, input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; }
+        button { width: 100%; padding: 12px; background-color: #0080ff; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; font-weight: bold; }
+        button:hover { background-color: #0066cc; }
+        #resultado { margin-top: 20px; padding: 15px; background: white; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); white-space: pre-wrap; display: none; }
+    </style>
+</head>
+<body>
+
+    <h1>🗺️ BAtour AI</h1>
+    <p style="text-align: center; color: #666;">Planificador de Itinerarios Inclusivos - CABA</p>
+
+    <form id="tourForm">
+        <div class="form-group">
+            <label>Barrio de CABA:</label>
+            <input type="text" id="barrio" value="La Boca" required>
+        </div>
+        <div class="form-group">
+            <label>Perfil o Nicho de Interés:</label>
+            <input type="text" id="interes" value="Historia" required>
+        </div>
+        <div class="form-group">
+            <label>Accesibilidad:</label>
+            <select id="accesibilidad">
+                <option value="SillaDeRuedas">Silla de Ruedas</option>
+                <option value="Cochecito">Cochecito de bebé</option>
+                <option value="AdultosMayores">Adultos Mayores</option>
+                <option value="Ninguna">Ninguna</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Hora de Inicio (Formato 24h):</label>
+            <input type="number" id="horario" value="14" min="0" max="23" required>
+        </div>
+        <button type="submit" id="btnEnviar">Generar Itinerario Inteligente</button>
+    </form>
+
+    <div id="resultado"></div>
+
+    <script>
+        document.getElementById('tourForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btnEnviar');
+            const resDiv = document.getElementById('resultado');
+            
+            btn.innerText = "Procesando itinerario con IA...";
+            btn.disabled = true;
+            resDiv.style.display = "none";
+
+            const barrio = encodeURIComponent(document.getElementById('barrio').value);
+            const interes = encodeURIComponent(document.getElementById('interes').value);
+            const accesibilidad = encodeURIComponent(document.getElementById('accesibilidad').value);
+            const horario = encodeURIComponent(document.getElementById('horario').value);
+
+            // Tu link exacto de Make
+            const urlMake = `https://make.com{barrio}&interes=${interes}&accesibilidad=${accesibilidad}&horario=${horario}`;
+
+            try {
+                const response = await fetch(urlMake);
+                const data = await response.text();
+                resDiv.innerText = data;
+                resDiv.style.display = "block";
+            } catch (error) {
+                resDiv.innerText = "Error al conectar con el agente de IA. Verificá Make.";
+                resDiv.style.display = "block";
+            } finally {
+                btn.innerText = "Generar Itinerario Inteligente";
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
