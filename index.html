@@ -63,10 +63,9 @@
             const horario = encodeURIComponent(document.getElementById('horario').value);
 
             // Tu link exacto de Make
-            const urlMake =         const urlMake = `https://make.com{barrio}&interes=${interes}&accesibilidad=${accesibilidad}&horario=${horario}`;
-;`https://hook.us2.make.com/jbbpj9x4rcj586o8bdupxgb556mvtrab`;
+            const urlMake = `https://hook.us2.make.com/jbbpj9x4rcj586o8bdupxgb556mvtrab`;
             try {
-                const response = await fetch(urlMake);
+            const response = await fetch(`${urlMake}?barrio=${barrio}&interes=${interes}&accesibilidad=${accesibilidad}&horario=${horario}`);
                 const data = await response.text();
                 resDiv.innerText = data;
                 resDiv.style.display = "block";
