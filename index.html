@@ -64,8 +64,6 @@
 
             // Tu link exacto de Make
             const urlMake = `https://make.com{barrio}&interes=${interes}&accesibilidad=${accesibilidad}&horario=${horario}`;
-
-
             try {
                 const response = await fetch(urlMake);
                 const data = await response.text();
