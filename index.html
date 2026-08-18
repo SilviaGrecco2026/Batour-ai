@@ -63,7 +63,7 @@
             const horario = encodeURIComponent(document.getElementById('horario').value);
 
             // Tu link exacto de Make
-            const urlMake = `https://make.com{barrio}&interes=${interes}&accesibilidad=${accesibilidad}&horario=${horario}`;
+            const urlMake = https://hook.us2.make.com/jbbpj9x4rcj586o8bdupxgb556mvtrab;
 
             try {
                 const response = await fetch(urlMake);
@@ -71,8 +71,8 @@
                 resDiv.innerText = data;
                 resDiv.style.display = "block";
             } catch (error) {
-                resDiv.innerText = https://hook.us2.make.com/jbbpj9x4rcj586o8bdupxgb556mvtrab;
-                resDiv.style.display = "block";
+               resDiv.innerText = "Error de conexión con el servidor de IA. Reintente.";
+               resDiv.style.display = "block";
             } finally {
                 btn.innerText = "Generar Itinerario Inteligente";
                 btn.disabled = false;
